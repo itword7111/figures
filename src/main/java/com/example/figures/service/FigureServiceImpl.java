@@ -7,6 +7,7 @@ import com.example.figures.model.Color;
 import com.example.figures.model.FigureDto;
 import com.example.figures.model.RectangleDto;
 import com.example.figures.repository.FigureRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -17,11 +18,10 @@ import java.util.stream.Collectors;
 public class FigureServiceImpl implements FigureService {
     private final FigureRepository figureRepository;
     private final MappingUtils mappingUtils;
-
+@Autowired
     public FigureServiceImpl(FigureRepository figureRepository, MappingUtils mappingUtils) {
         this.figureRepository = figureRepository;
         this.mappingUtils = mappingUtils;
-        figureRepository.init();
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.example.figures.entity.Circle;
 import com.example.figures.entity.Rectangle;
 import com.example.figures.model.Color;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 public interface FigureRepository {

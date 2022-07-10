@@ -5,6 +5,7 @@ import com.example.figures.entity.Rectangle;
 import com.example.figures.model.Color;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,15 +21,15 @@ import java.util.List;
 @Transactional
 public class FigureRepositoryImpl implements FigureRepository {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void init() {
-        BigInteger u = (BigInteger) entityManager.createNativeQuery("SELECT count(*) FROM information_schema.tables\n" +
-                "WHERE table_name = 'circle' Limit 1"
-        ).getSingleResult();
-
-        if (u.intValue() == 0) {
+        boolean isSchemaExists=(boolean)entityManager.createNativeQuery("SELECT case when count(*) > 0 then TRUE else FALSE end FROM information_schema.schemata WHERE schema_name = 'figure'").getSingleResult();
+        if (!isSchemaExists) {
+            entityManager.createNativeQuery("CREATE SCHEMA IF NOT EXISTS figure\n" +
+                    "    AUTHORIZATION postgres;")
+                    .executeUpdate();
             entityManager.createNativeQuery("CREATE TABLE IF NOT EXISTS figure.circle ( id serial , color varchar(255) not null,  radius integer, primary key (id))")
                     .executeUpdate();
             entityManager.createNativeQuery("CREATE TABLE IF NOT EXISTS figure.rectangle ( id serial , color varchar(255) not null,  first_side integer, second_side integer, primary key (id))")
