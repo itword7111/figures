@@ -6,12 +6,12 @@ pipeline{
     stages{
         stage('Build maven'){
                 steps {
+                    sh 'pwd'
                     sh 'mvn clean install'
                 }
             }
         stage('Build'){
             steps {
-                sh 'pwd'
                 sh 'docker-compose build'
                 sh 'docker-compose up'
             }
