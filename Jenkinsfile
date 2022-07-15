@@ -13,6 +13,7 @@ pipeline{
         stage('Build'){
             steps {
                 sh 'docker-compose build'
+                sh 'docker-compose create'
             }
         }
         stage('Login'){
