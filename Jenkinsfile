@@ -23,7 +23,7 @@ pipeline{
         }
         stage('Push'){
             steps{
-                sh 'docker push dockerhub_main'
+                sh 'docker push pavelkalashnikov9819/figures'
             }
         }
     }
