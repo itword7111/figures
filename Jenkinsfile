@@ -22,7 +22,7 @@ pipeline{
         }
         stage('Push'){
             steps{
-                sh 'docker push "${dockerhub_main}:latest" '
+                sh 'docker push "dockerhub_main:latest" '
             }
         }
     }
