@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'мастер'}
+    agent {label 'master'}
     environment {
         DOCKERHUB_CREDENTIALS = credentials('jenkins-dockerhub')
     }
