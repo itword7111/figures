@@ -4,6 +4,11 @@ pipeline{
         DOCKERHUB_CREDENTIALS = credentials('jenkins-dockerhub')
     }
     stages{
+        stage('Build maven'){
+                steps {
+                    sh 'mvn clean install'
+                }
+            }
         stage('Build'){
             steps {
                 sh 'pwd'
