@@ -13,7 +13,6 @@ pipeline{
         stage('Build'){
             steps {
                 sh 'docker-compose build'
-                sh 'docker-compose up'
             }
         }
         stage('Login'){
@@ -23,7 +22,7 @@ pipeline{
         }
         stage('Push'){
             steps{
-                sh 'docker push'
+                sh 'docker push "dockerhub_main" '
             }
         }
     }
